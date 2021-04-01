@@ -20,6 +20,7 @@ import org.apache.cassandra.db.marshal.DurationType;
 import org.apache.cassandra.db.marshal.FloatType;
 import org.apache.cassandra.db.marshal.InetAddressType;
 import org.apache.cassandra.db.marshal.Int32Type;
+import org.apache.cassandra.db.marshal.IntegerType;
 import org.apache.cassandra.db.marshal.LongType;
 import org.apache.cassandra.db.marshal.ShortType;
 import org.apache.cassandra.db.marshal.SimpleDateType;
@@ -71,6 +72,8 @@ public final class CassandraTypeConverter {
         typeMap.put(DataType.Name.TUPLE, new TupleTypeConverter());
         typeMap.put(DataType.Name.UDT, new UserTypeConverter());
         typeMap.put(DataType.Name.UUID, new BasicTypeConverter<>(UUIDType.instance));
+        typeMap.put(DataType.Name.VARINT, new BasicTypeConverter<>(IntegerType.instance));
+        typeMap.put(DataType.Name.VARCHAR, new BasicTypeConverter<>(UTF8Type.instance));
     }
 
     public static AbstractType<?> convert(DataType type) {
